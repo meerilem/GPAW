@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 numberlist = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0']
-
+# 
 def readTheFile(filename):
 	m, atomname = [], []
 	notatom=True
@@ -49,7 +49,7 @@ def plotAtomSpectra(m, atomname, s):
 	  t.append(a)
 	return w, t
 	
-def plotFinalSpectra(namelist, nr, lineW, dashes, ncolors):
+def plotFinalSpectra(namelist, nr, lineW, dashes, ncolors, plot_list):
 	w, t = [], []
 	count = 0
 	for name in namelist:
@@ -64,7 +64,7 @@ def plotFinalSpectra(namelist, nr, lineW, dashes, ncolors):
 		count += 1
 
 	for i in range(len(namelist)):
-		plt.plot(w[i], t[i], linewidth=lineW, c=ncolors[i], label=namelist[i], dashes=dashes)
+		plot_list += plt.plot(w[i], t[i], linewidth=lineW, c=ncolors[i], label=namelist[i], dashes=dashes)
 
 ########################################################
 ncolors=['#377eb8', '#ff7f00', '#4daf4a', '#f781bf', '#a65628', '#984ea3', '#999999', '#e41a1c', '#dede00']
@@ -74,46 +74,48 @@ grey=['#707070'] * 8
 s = 0.5
 atom = 'C'
 
-plt.figure(figsize=(3.75, 3.75))
+ax = plt.figure(figsize=(8.3/2.54,8.3/2.54)) # 8.3 cm to inches
 butane = 289.65
 aliphatic = 285.0
+
+plot_list = []
 
 namelist1 = ['EMImBCN4', 'EMImTFSI', 'EMImFSI','EMImPF6', 'EMImBF4', 'EMImCl', 'EMImBr', 'EMImI']
 numbers = [0, 1, 2, 3, 4, 5, 6, 7]
 filename = ""
-plotFinalSpectra(namelist1, numbers, 3.0, [1,0], ncolors)
+plotFinalSpectra(namelist1, numbers, 3.0, [1,0], ncolors,plot_list)
 
 	
 namelist2 = ['EMImTFSI','EMImPF6', 'EMImBF4', 'EMImCl', 'EMImBr', 'EMImI']
 nr = [1, 3, 4, 5, 6, 7]
 filename = "_Villar"
-plotFinalSpectra(namelist2, nr, 1.0, [4,1,4,1], black)
+plotFinalSpectra(namelist2, nr, 1.0, [4,1,4,1], black,plot_list)
 
 namelist2 = ['EMImBCN4']
 nr = [0]
 filename = "_Kruusma"
-plotFinalSpectra(namelist2, nr, 1.0, [4,1,1,1], black)
+plotFinalSpectra(namelist2, nr, 1.0, [4,1,1,1], black,plot_list)
 
 	
 namelist2 = ['EMImBF4']
 nr = [4]
 filename ='_Tonisoo'
-plotFinalSpectra(namelist2, nr, 1.0, [4,1,1,1], grey)
+plotFinalSpectra(namelist2, nr, 1.0, [4,1,1,1], grey,plot_list)
 
 namelist2 = ['EMImBCN4', 'EMImTFSI', 'EMImBF4']
 nr = [0, 1, 4]
 filename = '_Kotz'
-plotFinalSpectra(namelist2, nr, 1.0, [1,1], black)
+plotFinalSpectra(namelist2, nr, 1.0, [1,1], black,plot_list)
 
 namelist2 = ['EMImTFSI']
 nr = [1]
 filename = '_Hammer'
-plotFinalSpectra(namelist2, nr, 1.0, [4,1,4,1,1,1], grey)
+plotFinalSpectra(namelist2, nr, 1.0, [4,1,4,1,1,1], grey,plot_list)
 
 namelist2 = ['EMImTFSI']
 nr = [1]
 filename = '_Reinmoller'
-plotFinalSpectra(namelist2, nr, 1.0, [4,1,4,1,1,1,1,1], black)
+plotFinalSpectra(namelist2, nr, 1.0, [4,1,4,1,1,1,1,1], black,plot_list)
 
 """
 from matplotlib.lines import Line2D
@@ -130,13 +132,42 @@ legend_elements.append(Line2D([0], [0], ls='--', color='k', label='Kruusma', mar
 
 plt.legend(handles=legend_elements, loc='best', prop={'size': 10})
 """
+
+# * Loop to create multiple legends
+
+from matplotlib.legend import Legend
+
+# * Change legend labels and y-positions here
+
+leg_names = [ r"$name_{1}$",r"$name_{2}$",
+							r"$name_{3}$", r"$name_{4}$",
+							r"$name_{5}$", r"$name_{6}$",
+							r"$name_{7}$", r"$name_{8}$"]
+
+leg_ypos = [0.22, 0.32, 0.405, 0.505,
+						0.593, 0.68, 0.77, 0.875 ]
+
+for i in range(8):
+	leg = Legend(ax,[plot_list[i]],[leg_names[i]],loc=(0.73,leg_ypos[i]),frameon=False,fontsize=7,)
+	ax.add_artist(leg)
+
+# leg_1 = Legend(ax,plot_list[:2],[r'$G_{\mu \nu}$',r'$\Lambda g_{\mu \nu}$'],loc=(0.7,0.1),frameon=False)
+# ax.add_artist(leg_1)
+
+# leg_2 = Legend(ax,plot_list[2],['name3','name4'],loc=loc=(0.7,0.1),frameon=False)
+# ax.add_artist(leg_2)
+
+# leg_3 = Legend(ax,plot_list[4:6],['name5','name6'],loc='lower right',frameon=False)
+# ax.add_artist(leg_3)
+
 plt.yticks([])
+plt.xticks([284,285,286,287,288])
 
 #plt.title(r"%s %s1s XPS spectra" % ('EMIm cation', atom))
 plt.ylabel("intensity")
 plt.xlabel("binding energy / eV")
 #plt.tick_params(labelsize=16)
-plt.xlim(283.4,288.7)
+plt.xlim(283.8,289.5)
 plt.tight_layout()
 plt.savefig('figure3_EmimCation_stacked.png', format="png", dpi=300, bbox_inches='tight')
 plt.savefig('figure3_EmimCation_stacked.svg', format="svg", dpi=2000, bbox_inches='tight')
