@@ -129,7 +129,7 @@ ax.axes.set_yticklabels([])
 """
 plt.xticks(fontsize=7)
 plt.yticks([])
-fig.figsize=(3.75, 3.75)
+fig.figsize=(8.3/2.54,8.3/2.54) # 8.3 cm to inches
 #plt.title(r"%s %s1s XPS spectra" % ('EMImBF4', atom))
 plt.ylabel("intensity",fontsize=9)
 plt.xlabel("binding energy / eV",fontsize=9)

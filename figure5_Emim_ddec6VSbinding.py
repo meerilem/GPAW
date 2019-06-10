@@ -84,7 +84,7 @@ X, Y = [], []
 nr_of_atom = 4
 whatAtom = 'C'
 
-plt.figure(figsize=(3.75, 3.75))
+plt.figure(figsize=(8.3/2.54,8.3/2.54)) # 8.3 cm to inches
 
 count = -1
 for cat in cation:
