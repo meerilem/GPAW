@@ -107,8 +107,7 @@ plt.legend(handles=legend_elements, loc='best', )
 
 
 from PIL import Image
-path=r"/home/meeri/NextCloud/PhD-Lembinen/Igor/Documents/XPS/EMIm.png"
-im = Image.open(path)
+im = Image.open("EMIm.png")
 height = im.size[1]
 """
 # We need a float array between 0-1, rather than
@@ -128,11 +127,12 @@ newax.axis('off')
 
 ax.axes.set_yticklabels([])
 """
+plt.xticks(fontsize=7)
 plt.yticks([])
-fig.figsize=(3.75, 3.75)
+fig.figsize=(8.3/2.54,8.3/2.54) # 8.3 cm to inches
 #plt.title(r"%s %s1s XPS spectra" % ('EMImBF4', atom))
-plt.ylabel("intensity")
-plt.xlabel("binding energy / eV")
+plt.ylabel("intensity",fontsize=9)
+plt.xlabel("binding energy / eV",fontsize=9)
 fig.tight_layout()
 fig.savefig('./figures_for_article/figure2_EmimBf4_stacked.png', format="png", dpi=300, bbox_inches='tight')
 fig.savefig('./figures_for_article/figure2_EmimBf4_stacked.svg', format="svg", dpi=2000, bbox_inches='tight')
