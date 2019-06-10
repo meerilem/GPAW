@@ -100,17 +100,22 @@ for cat in cation:
 	    	atomname, m = [], []
 	    	m, atomname = ReadSpectraFile('./ready/' + cat + an + '/' + cat + an + '.out')
 	    	X.append([m[nr_of_atom]])
-	    plt.scatter(m[:len(bader_atom)], bader_atom, c=ncolors[count], marker = marker[count], s=16, label=an)
+	    plt.scatter(bader_atom, m[:len(bader_atom)], c=ncolors[count], marker = marker[count], s=16, label=an)
 	 
 from sklearn.linear_model import LinearRegression
 reg = LinearRegression().fit(X, Y) 
 y = reg.predict(X)
-plt.plot(X, y, 'k-', lw=1.0)
+plt.plot(y, X, 'k-', lw=1.0)
 plt.legend()
-plt.ylabel("DDEC6 charge / e")
-plt.xlabel("binding energy / eV")
+plt.xlabel("DDEC6 charge / e",fontsize=9)
+plt.ylabel("binding energy / eV",fontsize=9)
 
-plt.savefig('figure5_ChargeVSSpectra_%s%s_DDEC6_allAtoms.png' % (cation[0],"all"))
+plt.xticks(fontsize=7)
+plt.yticks(fontsize=7)
+
+plt.tight_layout()
+
+plt.savefig('figure5_ChargeVSSpectra_%s%s_DDEC6_allAtoms.png' % (cation[0],"all"), dpi=2000, bbox_inches='tight')
 
 
 
