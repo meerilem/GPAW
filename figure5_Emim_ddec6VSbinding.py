@@ -4,7 +4,6 @@ import numpy as np
 
 numberlist = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0']
 atomname, m = [], []
-ncolors = ['#ff0000', '#0000ff', '#00ff00', '#00ffff', '#ffd700', '#ff00ff', '#ff8000', '#80ff00', '#00ff80', '#0080ff', '#7f00ff', '#ff007f', '#bc8f8f', '#c71585', '#ff0000', '#0000ff', '#00ff00', '#00ffff', '#ffd700', '#ff00ff', '#ff8000', '#80ff00', '#00ff80', '#0080ff', '#7f00ff', '#ff007f', '#bc8f8f', '#c71585']
 ncolors=['#377eb8', '#ff7f00', '#4daf4a', '#f781bf', '#a65628', '#984ea3', '#999999', '#e41a1c', '#dede00']
 
 
@@ -84,21 +83,21 @@ X, Y = [], []
 nr_of_atom = 4
 whatAtom = 'C'
 
-plt.figure(figsize=(8.3/2.54,8.3/2.54)) # 8.3 cm to inches
+plt.figure(figsize=(9/2.54,9/2.54)) # 8.3 cm to inches
 
 count = -1
 for cat in cation:
 	for an in anion:
 	    count += 1
 	    atom, DDEC, bader, catan, DDEC_atom, bader_atom = [], [], [], [], [], []
-	    atom, DDEC, bader, catan = ReadChargeFile('./ready/' + cat + an + '/' + cat + an + '_charges.out')
+	    atom, DDEC, bader, catan = ReadChargeFile('./data/' + cat + an + '/' + cat + an + '_charges.out')
 	    DDEC_cat, DDEC_an, bader_cat, bader_an = Charges(DDEC, bader, catan)
 	    DDEC_atom, bader_atom = SortCharges(atom, DDEC, bader, whatAtom)
+	    atomname, m = [], []
+	    m, atomname = ReadSpectraFile('./data/' + cat + an + '/' + cat + an + '.out')
 	    for i in range(len(bader_atom)):
 	    	nr_of_atom = i
 	    	Y.append([bader_atom[nr_of_atom]])
-	    	atomname, m = [], []
-	    	m, atomname = ReadSpectraFile('./ready/' + cat + an + '/' + cat + an + '.out')
 	    	X.append([m[nr_of_atom]])
 	    plt.scatter(bader_atom, m[:len(bader_atom)], c=ncolors[count], marker = marker[count], s=16, label=an)
 	 
@@ -106,19 +105,13 @@ from sklearn.linear_model import LinearRegression
 reg = LinearRegression().fit(X, Y) 
 y = reg.predict(X)
 plt.plot(y, X, 'k-', lw=1.0)
+params = {'legend.fontsize': 7}
+plt.rcParams.update(params)
 plt.legend()
-plt.xlabel("DDEC6 charge / e",fontsize=9)
-plt.ylabel("binding energy / eV",fontsize=9)
-
-plt.xticks(fontsize=7)
-plt.yticks(fontsize=7)
+plt.xlabel("DDEC6 charge / e")
+plt.ylabel(r"$\Delta$" + "KS binding energy / eV")
 
 plt.tight_layout()
-
-plt.savefig('figure5_ChargeVSSpectra_%s%s_DDEC6_allAtoms.png' % (cation[0],"all"), dpi=2000, bbox_inches='tight')
-
-
-
-
-
-
+plt.savefig('./figures_for_article/figure5_ChargeVSSpectra_%s%s_DDEC6.png' % (cation[0],"all"), format="png", dpi=300, bbox_inches='tight')
+plt.savefig('./figures_for_article/figure5_ChargeVSSpectra_%s%s_DDEC6.svg' % (cation[0],"all"), format="svg", dpi=2000, bbox_inches='tight')
+plt.savefig('./figures_for_article/figure5_ChargeVSSpectra_%s%s_DDEC6.eps' % (cation[0],"all"), format="eps", dpi=2000, bbox_inches='tight')

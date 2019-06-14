@@ -38,7 +38,7 @@ def getListOfAtoms(atom, m, atomname):
 def plotAtomSpectra(m, atomname, s, y_position, dashes):
 	atoms = ['C6', 'C5', 'C1', 'C2', 'C3', 'C4', 'X', 'Y']
 	t = []
-	w = np.linspace(min(m) - 1.2, max(m) + 1.2, 201)
+	w = np.linspace(min(m) - 3, max(m) + 3, 201)
 	# plot individual signals
 	for i in range(len(m)):
 	    plt.plot(w, gaussian(w, m[i], s) + y_position, label=atomname[i], color=ncolors[i], dashes=dashes)
@@ -67,13 +67,13 @@ def plotFinalSpectra(lineW, dashes, y_pos):
 s = 0.5
 atom = 'C'
 
-fig = plt.figure(figsize=(3.75, 3.75))
+fig = plt.figure(figsize=(9/2.54,9/2.54))
 #fig, ax = plt.subplots()
 
 butane = 289.65
 aliphatic = 285.0
 
-linewidth = 0.5
+linewidth = 1
 
 name = 'EMImBF4'
 atom = 'C'
@@ -92,53 +92,39 @@ plotFinalSpectra(linewidth, [1,1], 6)
 filename='_1s'
 plotFinalSpectra(linewidth, [1,1,1,1,3,1], -2)
 
-plt.legend()
 from matplotlib.lines import Line2D
 legend_elements = []
-legend_elements.append(Line2D([0], [0], dashes=[1,1], color='k', label='Schmitz', markersize=10))
-legend_elements.append(Line2D([0], [0], dashes=[3,1,1,1], color='k', label='Tonisoo', markersize=10))
-legend_elements.append(Line2D([0], [0], dashes=[3,1,3,1], color='k', label='Garcia', markersize=10))
-legend_elements.append(Line2D([0], [0], dashes=[1,0], color='k', label='dKS', markersize=10))
-legend_elements.append(Line2D([0], [0], dashes=[1,1,1,1,3,1], color='k', label='1s', markersize=10))
-params = {'legend.fontsize': 8,
+legend_elements.append(Line2D([0], [0], dashes=[1,1], color='k', label=r"$Schmitz$", markersize=10))
+legend_elements.append(Line2D([0], [0], dashes=[3,1,1,1], color='k', label=r"$Tonisoo$", markersize=10))
+legend_elements.append(Line2D([0], [0], dashes=[3,1,3,1], color='k', label=r"$Garcia$", markersize=10))
+legend_elements.append(Line2D([0], [0], dashes=[1,0], color='k', label=r"${\Delta}KS$", markersize=10))
+legend_elements.append(Line2D([0], [0], dashes=[1,1,1,1,3,1], color='k', label=r"$1s$", markersize=10))
+params = {'legend.fontsize': 7,
           'legend.handlelength': 2}
 plt.rcParams.update(params)
-plt.legend(handles=legend_elements, loc='best', )
-
-
-from PIL import Image
-im = Image.open("EMIm.png")
-height = im.size[1]
-"""
-# We need a float array between 0-1, rather than
-# a uint8 array between 0-255
-im = np.array(im).astype(np.float) / 255
-fig.figimage(im, 0, 0, zorder=1, resize=True)
+plt.legend(handles=legend_elements, loc='upper right')
+plt.xlim(283.5,289)
+plt.ylabel("intensity")
+plt.xlabel("binding energy / eV")
+plt.yticks([])
 
 from matplotlib.cbook import get_sample_data
-
+path="/home/meeri/Documents/GitHub/XPS_GPAW/EMIm.png"
 im = plt.imread(get_sample_data(path))
-"""
-"""newax = fig.add_axes([0.0, 0.7, 0.25, 0.25], anchor='NE', zorder=1)
+
+newax = fig.add_axes([0.15, 0.65, 0.3, 0.3], anchor='NE', zorder=1)
 plt.imshow(im)
 newax.imshow(im)
 newax.axis('off')
+#newax.axes.set_yticklabels([])
 
 
-ax.axes.set_yticklabels([])
-"""
-plt.xticks(fontsize=7)
 plt.yticks([])
-fig.figsize=(8.3/2.54,8.3/2.54) # 8.3 cm to inches
 #plt.title(r"%s %s1s XPS spectra" % ('EMImBF4', atom))
-plt.ylabel("intensity",fontsize=9)
-plt.xlabel("binding energy / eV",fontsize=9)
+plt.ylabel("intensity")
+plt.xlabel("binding energy / eV")
 fig.tight_layout()
 fig.savefig('./figures_for_article/figure2_EmimBf4_stacked.png', format="png", dpi=300, bbox_inches='tight')
 fig.savefig('./figures_for_article/figure2_EmimBf4_stacked.svg', format="svg", dpi=2000, bbox_inches='tight')
 fig.savefig('./figures_for_article/figure2_EmimBf4_stacked.eps', format="eps", dpi=2000, bbox_inches='tight')
-
-
-
-
 

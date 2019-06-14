@@ -36,7 +36,7 @@ def getListOfAtoms(atom, m, atomname):
 
 def plotAtomSpectra(m, atomname, s):
 	t = []
-	w = np.linspace(min(m) - 1, max(m) + 1, 201)
+	w = np.linspace(min(m) - 3, max(m) + 3, 201)
 	for i in range(len(m)):
 	    y_pos = 1.1
 	    for j in range(i):
@@ -54,7 +54,7 @@ def plotFinalSpectra(namelist, nr, lineW, dashes, ncolors, plot_list):
 	count = 0
 	for name in namelist:
 		m, atomname = [], []
-		m, atomname = readTheFile('./ready/' + name + '/' + name + filename + '.out')
+		m, atomname = readTheFile('./data/' + name + '/' + name + filename + '.out')
 		m_tmp, atomname = getListOfAtoms(atom, m, atomname)
 		m2 = [x+aliphatic-m_tmp[0] for x in m_tmp]
 		w_tmp, t_tmp = plotAtomSpectra(m2, atomname , s)
@@ -74,7 +74,7 @@ grey=['#707070'] * 8
 s = 0.5
 atom = 'C'
 
-ax = plt.figure(figsize=(8.3/2.54,8.3/2.54)) # 8.3 cm to inches
+ax = plt.figure(figsize=(9/2.54,9/2.54)) # 9 cm to inches
 butane = 289.65
 aliphatic = 285.0
 
@@ -139,39 +139,31 @@ from matplotlib.legend import Legend
 
 # * Change legend labels and y-positions here
 
-leg_names = [ r"$name_{1}$",r"$name_{2}$",
-							r"$name_{3}$", r"$name_{4}$",
-							r"$name_{5}$", r"$name_{6}$",
-							r"$name_{7}$", r"$name_{8}$"]
+leg_names = [ r"$EMIMB(CN)_{4}$",r"$EMImTFSI$",
+							r"$EMImFSI$", r"$EMImPF_{6}$",
+							r"$EMImBF_{4}$", r"$EMImCl$",
+							r"$EMImBr$", r"$EMImI$"]
 
-leg_ypos = [0.22, 0.32, 0.405, 0.505,
+leg_ypos = [0.244, 0.325, 0.405, 0.505,
 						0.593, 0.68, 0.77, 0.875 ]
 
 for i in range(8):
-	leg = Legend(ax,[plot_list[i]],[leg_names[i]],loc=(0.73,leg_ypos[i]),frameon=False,fontsize=7,)
+	leg = Legend(ax,[plot_list[i]],[leg_names[i]],loc=(0.74,leg_ypos[i]),frameon=False,fontsize=7,handlelength=0)
 	ax.add_artist(leg)
-
-# leg_1 = Legend(ax,plot_list[:2],[r'$G_{\mu \nu}$',r'$\Lambda g_{\mu \nu}$'],loc=(0.7,0.1),frameon=False)
-# ax.add_artist(leg_1)
-
-# leg_2 = Legend(ax,plot_list[2],['name3','name4'],loc=loc=(0.7,0.1),frameon=False)
-# ax.add_artist(leg_2)
-
-# leg_3 = Legend(ax,plot_list[4:6],['name5','name6'],loc='lower right',frameon=False)
-# ax.add_artist(leg_3)
 
 plt.yticks([])
 plt.xticks([284,285,286,287,288])
+
 
 #plt.title(r"%s %s1s XPS spectra" % ('EMIm cation', atom))
 plt.ylabel("intensity")
 plt.xlabel("binding energy / eV")
 #plt.tick_params(labelsize=16)
-plt.xlim(283.8,289.5)
+plt.xlim(283.5,288.7)
 plt.tight_layout()
-plt.savefig('figure3_EmimCation_stacked.png', format="png", dpi=300, bbox_inches='tight')
-plt.savefig('figure3_EmimCation_stacked.svg', format="svg", dpi=2000, bbox_inches='tight')
-plt.savefig('figure3_EmimCation_stacked.eps', format="eps", dpi=2000, bbox_inches='tight')
+plt.savefig('./figures_for_article/figure3_EmimCation_stacked.png', format="png", dpi=300, bbox_inches='tight')
+plt.savefig('./figures_for_article/figure3_EmimCation_stacked.svg', format="svg", dpi=2000, bbox_inches='tight')
+plt.savefig('./figures_for_article/figure3_EmimCation_stacked.eps', format="eps", dpi=2000, bbox_inches='tight')
 
 
 
