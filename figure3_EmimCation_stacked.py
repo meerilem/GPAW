@@ -5,7 +5,7 @@ numberlist = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0']
 # 
 def readTheFile(filename):
 	m, atomname = [], []
-	notatom=True
+	# notatom=True
 	with open(filename) as f:
 		count = 0
 		for line in f:
@@ -74,7 +74,7 @@ grey=['#707070'] * 8
 s = 0.5
 atom = 'C'
 
-ax = plt.figure(figsize=(9/2.54,9/2.54)) # 9 cm to inches
+ax = plt.figure(figsize=(8.3/2.54,8.3/2.54)) # 9 cm to inches
 butane = 289.65
 aliphatic = 285.0
 
@@ -151,13 +151,13 @@ for i in range(8):
 	leg = Legend(ax,[plot_list[i]],[leg_names[i]],loc=(0.74,leg_ypos[i]),frameon=False,fontsize=7,handlelength=0)
 	ax.add_artist(leg)
 
-plt.yticks([])
-plt.xticks([284,285,286,287,288])
+plt.yticks([],fontsize=7)
+plt.xticks([284,285,286,287,288],fontsize=7)
 
 
 #plt.title(r"%s %s1s XPS spectra" % ('EMIm cation', atom))
-plt.ylabel("intensity")
-plt.xlabel("binding energy / eV")
+plt.ylabel("intensity / arb. units",fontsize=8)
+plt.xlabel("binding energy / eV",fontsize=8)
 #plt.tick_params(labelsize=16)
 plt.xlim(283.5,288.7)
 plt.tight_layout()

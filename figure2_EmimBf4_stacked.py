@@ -6,7 +6,7 @@ ncolors=['#377eb8', '#ff7f00', '#4daf4a', '#f781bf', '#a65628', '#984ea3', '#999
 
 def readTheFile(filename):
 	m, atomname = [], []
-	notatom=True
+	# notatom=True
 	with open(filename) as f:
 		count = 0
 		for line in f:
@@ -58,7 +58,7 @@ def plotAtomSpectra(m, atomname, s, y_position, dashes):
 def plotFinalSpectra(lineW, dashes, y_pos):
 	w, t = [], []
 	m, atomname = [], []
-	m, atomname = readTheFile('./ready/' + name + '/' + name + filename + '.out')
+	m, atomname = readTheFile('./data/' + name + '/' + name + filename + '.out')
 	m_tmp, atomname = getListOfAtoms(atom, m, atomname)
 	m2 = [x+aliphatic-m_tmp[0] for x in m_tmp]
 	w, t = plotAtomSpectra(m2, atomname , s, y_pos, dashes)
@@ -67,7 +67,7 @@ def plotFinalSpectra(lineW, dashes, y_pos):
 s = 0.5
 atom = 'C'
 
-fig = plt.figure(figsize=(9/2.54,9/2.54))
+fig = plt.figure(figsize=(8.3/2.54,8.3/2.54))
 #fig, ax = plt.subplots()
 
 butane = 289.65
@@ -104,25 +104,26 @@ params = {'legend.fontsize': 7,
 plt.rcParams.update(params)
 plt.legend(handles=legend_elements, loc='upper right')
 plt.xlim(283.5,289)
-plt.ylabel("intensity")
-plt.xlabel("binding energy / eV")
+plt.ylabel("intensity / arb. units",fontsize=8)
+plt.xlabel("binding energy / eV",fontsize=8)
+plt.xticks(fontsize=7)
 plt.yticks([])
 
 from matplotlib.cbook import get_sample_data
-path="/home/meeri/Documents/GitHub/XPS_GPAW/EMIm.png"
-im = plt.imread(get_sample_data(path))
+path="EMIm.png"
+im = plt.imread(path)
 
-newax = fig.add_axes([0.15, 0.65, 0.3, 0.3], anchor='NE', zorder=1)
+newax = fig.add_axes([0.12, 0.62, 0.3, 0.3], anchor='NE', zorder=1)
 plt.imshow(im)
 newax.imshow(im)
 newax.axis('off')
 #newax.axes.set_yticklabels([])
 
-
+plt.xticks(fontsize=7)
 plt.yticks([])
 #plt.title(r"%s %s1s XPS spectra" % ('EMImBF4', atom))
-plt.ylabel("intensity")
-plt.xlabel("binding energy / eV")
+plt.ylabel("intensity / arb. units",fontsize=8)
+plt.xlabel("binding energy / eV",fontsize=8)
 fig.tight_layout()
 fig.savefig('./figures_for_article/figure2_EmimBf4_stacked.png', format="png", dpi=300, bbox_inches='tight')
 fig.savefig('./figures_for_article/figure2_EmimBf4_stacked.svg', format="svg", dpi=2000, bbox_inches='tight')

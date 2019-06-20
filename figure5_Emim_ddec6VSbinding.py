@@ -83,7 +83,7 @@ X, Y = [], []
 nr_of_atom = 4
 whatAtom = 'C'
 
-plt.figure(figsize=(9/2.54,9/2.54)) # 8.3 cm to inches
+plt.figure(figsize=(8.3/2.54,8.3/2.54)) # 8.3 cm to inches
 
 count = -1
 for cat in cation:
@@ -108,9 +108,10 @@ plt.plot(y, X, 'k-', lw=1.0)
 params = {'legend.fontsize': 7}
 plt.rcParams.update(params)
 plt.legend()
-plt.xlabel("DDEC6 charge / e")
-plt.ylabel(r"$\Delta$" + "KS binding energy / eV")
-
+plt.xlabel("DDEC6 charge / e",fontsize=8)
+plt.ylabel(r"$\Delta$" + "KS binding energy / eV",fontsize=8)
+plt.xticks(fontsize=7)
+plt.yticks(fontsize=7)
 plt.tight_layout()
 plt.savefig('./figures_for_article/figure5_ChargeVSSpectra_%s%s_DDEC6.png' % (cation[0],"all"), format="png", dpi=300, bbox_inches='tight')
 plt.savefig('./figures_for_article/figure5_ChargeVSSpectra_%s%s_DDEC6.svg' % (cation[0],"all"), format="svg", dpi=2000, bbox_inches='tight')

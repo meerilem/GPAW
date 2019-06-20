@@ -5,7 +5,7 @@ numberlist = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0']
 
 def readTheFile(filename):
 	m, atomname = [], []
-	notatom=True
+	# notatom=True
 	with open(filename) as f:
 		count = 0
 		for line in f:
@@ -112,10 +112,16 @@ filename = "_Men"
 plotFinalSpectra(namelist2, nr, 1.0, [4,1,4,1], black, ax2)
 
 ax2.set_xlim(282, 286.5)
+plt.xticks([282,283,284,285,286],fontsize=7)
 #plt.title(r"%s %s1s XPS spectra" % ('EMIm cation', atom))
-ax1.set_yticklabels([])
-ax1.set_ylabel("intensity")
-plt.xlabel("binding energy / eV")
+ax1.tick_params(axis='both', which='both', labelsize=7)
+ax2.tick_params(axis='both', which='both', labelsize=7)
+# ax1.set_xticklabels(fontsize=7)
+# ax2.set_xticklabels(fontsize=7)
+ax1.set_yticks([])
+ax1.set_ylabel("intensity / arb. units",fontsize=8)
+ax1.set_xlabel("binding energy / eV",fontsize=8)
+ax2.set_xlabel("binding energy / eV",fontsize=8)
 #plt.tick_params(labelsize=16)
 plt.tight_layout()
 plt.savefig('./figures_for_article/figure4_two_figures_stackedCations.png', format="png", dpi=300, bbox_inches='tight')
