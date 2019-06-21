@@ -139,10 +139,14 @@ from matplotlib.legend import Legend
 
 # * Change legend labels and y-positions here
 
-leg_names = [ r"$EMIMB(CN)_{4}$",r"$EMImTFSI$",
-							r"$EMImFSI$", r"$EMImPF_{6}$",
-							r"$EMImBF_{4}$", r"$EMImCl$",
-							r"$EMImBr$", r"$EMImI$"]
+leg_names = [ r"$EMImB(CN)_{4}$",
+			r"$EMImTFSI$",
+			r"$EMImFSI$", 
+			r"$EMImPF_{6}$",
+			r"$EMImBF_{4}$", 
+			r"$EMImCl$",
+			r"$EMImBr$", 
+			r"$EMImI$"]
 
 leg_ypos = [0.244, 0.325, 0.405, 0.505,
 						0.593, 0.68, 0.77, 0.875 ]
