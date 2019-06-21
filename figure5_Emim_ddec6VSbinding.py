@@ -9,7 +9,7 @@ ncolors=['#377eb8', '#ff7f00', '#4daf4a', '#f781bf', '#a65628', '#984ea3', '#999
 
 def ReadChargeFile(filename):
 	with open(filename, 'r') as f:
-	    array = []
+	    # array = []
 	    lines = f.readlines()
 	    for line in lines:
 	        atom.append(line.split()[0])
@@ -42,7 +42,7 @@ def SortCharges(atom, DDEC, bader, whatAtom):
 			
 	
 def ReadSpectraFile(filename):
-	notatom=True
+	# notatom=True
 	with open(filename) as f:
 		count = 0
 		for line in f:
