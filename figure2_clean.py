@@ -2,7 +2,15 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 numberlist = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0']
-ncolors=['#377eb8', '#ff7f00', '#4daf4a', '#f781bf', '#a65628', '#984ea3', '#999999', '#e41a1c', '#dede00']
+ncolors=['#377eb8', 
+		'#ff7f00',
+		'#4daf4a',
+		'#f781bf', 
+		'#a65628', 
+		'#984ea3', 
+		'#999999', 
+		'#e41a1c', 
+		'#dede00']
 
 def readTheFile(filename):
 	m, atomname = [], []
