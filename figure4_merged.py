@@ -176,12 +176,25 @@ nr = [1]
 filename = '_Reinmoller'
 plotFinalSpectra(namelist2, nr, 1.0, [4,1,4,1,1,1,1,1], black,ax0)
 
-ax0.set_xlim(283.5,288.7)
-ax0.set_xticks([284,285,286,287,288])
+ax0.set_xlim(283.7,289.3)
+ax0.set_xticks([284,285,286,287,288,289])
 ax0.tick_params(axis='both', which='both', labelsize=7)
 
 #* Figure 3 done
 
+#* Text legends
+scale = 6.25
+legends = [ [289.2,  4, r"EMImB(CN)$_{4}$"],
+			[289.2, 10, r"EMImTFSI"],
+			[289.2, 15.75, r"EMImFSI"],
+			[289.2, 21.75, r"EMImPF$_{6}$"],
+			[289.2, 28, r"EMImBF$_{4}$"],
+			[289.2, 34.0, r"EMImCl"],
+			[289.2, 40.25, r"EMImBr"],
+			[289.2, 46.5, r"EMImI"]]
+
+for item in legends:
+	ax0.text(*item, horizontalalignment='right', rotation=0, size=7, color='k')
 
 
 #plt.title(r"%s %s1s XPS spectra" % ('EMIm cation', atom))
