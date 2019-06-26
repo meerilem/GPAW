@@ -179,7 +179,7 @@ plt.subplots_adjust(wspace=0.05)
 # plt.savefig('./figures_for_article/figure4_two_figures_stackedCations.png', format="png", dpi=300, bbox_inches='tight')
 # plt.savefig('./figures_for_article/figure4_two_figures_stackedCations.tiff', format="tiff", dpi=2000, bbox_inches='tight')
 # plt.savefig('./figures_for_article/figure4_two_figures_stackedCations.eps', format="eps", dpi=2000, bbox_inches='tight')
-plt.savefig('./figures_for_article/two_columns_test.png', format="png", dpi=300, bbox_inches='tight')
+plt.savefig('./figures_for_article/figure_two_columns.png', format="png", dpi=300, bbox_inches='tight')
 
 
 
