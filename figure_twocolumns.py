@@ -52,6 +52,7 @@ def plotAtomSpectra(m, atomname, s):
 def plotFinalSpectra(namelist, nr, lineW, dashes, ncolors, plt):
 	w, t = [], []
 	count = 0
+	scale = 6.25
 	for name in namelist:
 		m, atomname = [], []
 		m, atomname = readTheFile('./data/' + name + '/' + name + filename + '.out')
@@ -59,7 +60,7 @@ def plotFinalSpectra(namelist, nr, lineW, dashes, ncolors, plt):
 		m2 = [x+aliphatic-m_tmp[0] for x in m_tmp]
 		w_tmp, t_tmp = plotAtomSpectra(m2, atomname , s)
 		w.append(w_tmp)
-		new_list = [x+nr[count]*4 for x in t_tmp]
+		new_list = [x+nr[count]*scale for x in t_tmp]
 		t.append(new_list)
 		count += 1
 
@@ -67,7 +68,28 @@ def plotFinalSpectra(namelist, nr, lineW, dashes, ncolors, plt):
 		plt.plot(w[i], t[i], linewidth=lineW, c=ncolors[i], label=namelist[i], dashes=dashes)
 
 ########################################################
-ncolors=['#377eb8', '#ff7f00', '#4daf4a', '#f781bf', '#a65628', '#984ea3', '#999999', '#e41a1c', '#dede00']
+
+# Original palette
+# ncolors = [ '#377eb8', 
+# 			'#ff7f00', 
+# 			'#4daf4a', 
+# 			'#f781bf', 
+# 			'#a65628', 
+# 			'#984ea3', 
+# 			'#999999', 
+# 			'#e41a1c', 
+# 			'#dede00']
+
+# Colorblind-friendly palette
+ncolors = [ '#aa0a3c',
+			'#fa5078',
+			'#8c0a82',
+			'#f06ed2',
+			'#005ac8',
+			'#12c8fa',
+			'#006e82',
+			'#02AD51']
+
 black=['k'] * 8
 grey=['#707070'] * 8
 
@@ -154,12 +176,25 @@ nr = [1]
 filename = '_Reinmoller'
 plotFinalSpectra(namelist2, nr, 1.0, [4,1,4,1,1,1,1,1], black,ax0)
 
-ax0.set_xlim(283.5,288.7)
-ax0.set_xticks([284,285,286,287,288])
+ax0.set_xlim(283.7,289.3)
+ax0.set_xticks([284,285,286,287,288,289])
 ax0.tick_params(axis='both', which='both', labelsize=7)
 
 #* Figure 3 done
 
+#* Text legends
+scale = 6.25
+legends = [ [289.2,  4, r"EMImB(CN)$_{4}$"],
+			[289.2, 10, r"EMImTFSI"],
+			[289.2, 15.75, r"EMImFSI"],
+			[289.2, 21.75, r"EMImPF$_{6}$"],
+			[289.2, 28, r"EMImBF$_{4}$"],
+			[289.2, 34.0, r"EMImCl"],
+			[289.2, 40.25, r"EMImBr"],
+			[289.2, 46.5, r"EMImI"]]
+
+for item in legends:
+	ax0.text(*item, horizontalalignment='right', rotation=0, size=7, color='k')
 
 
 #plt.title(r"%s %s1s XPS spectra" % ('EMIm cation', atom))
@@ -178,7 +213,7 @@ plt.subplots_adjust(wspace=0.05)
 # plt.savefig('./figures_for_article/figure4_two_figures_stackedCations.png', format="png", dpi=300, bbox_inches='tight')
 # plt.savefig('./figures_for_article/figure4_two_figures_stackedCations.tiff', format="tiff", dpi=2000, bbox_inches='tight')
 # plt.savefig('./figures_for_article/figure4_two_figures_stackedCations.eps', format="eps", dpi=2000, bbox_inches='tight')
-plt.savefig('./figures_for_article/two_columns_test.png', format="png", dpi=300, bbox_inches='tight')
+plt.savefig('./figures_for_article/figure_two_columns.png', format="png", dpi=300, bbox_inches='tight')
 
 
 
