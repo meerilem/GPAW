@@ -68,7 +68,28 @@ def plotFinalSpectra(namelist, nr, lineW, dashes, ncolors, plt):
 		plt.plot(w[i], t[i], linewidth=lineW, c=ncolors[i], label=namelist[i], dashes=dashes)
 
 ########################################################
-ncolors=['#377eb8', '#ff7f00', '#4daf4a', '#f781bf', '#a65628', '#984ea3', '#999999', '#e41a1c', '#dede00']
+
+# Original palette
+# ncolors = [ '#377eb8', 
+# 			'#ff7f00', 
+# 			'#4daf4a', 
+# 			'#f781bf', 
+# 			'#a65628', 
+# 			'#984ea3', 
+# 			'#999999', 
+# 			'#e41a1c', 
+# 			'#dede00']
+
+# Colorblind-friendly palette
+ncolors = [ '#aa0a3c',
+			'#fa5078',
+			'#8c0a82',
+			'#f06ed2',
+			'#005ac8',
+			'#12c8fa',
+			'#006e82',
+			'#a0fa82']
+
 black=['k'] * 8
 grey=['#707070'] * 8
 
