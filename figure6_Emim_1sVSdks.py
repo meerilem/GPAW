@@ -5,9 +5,10 @@ import numpy as np
 numberlist = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0']
 atomname, m = [], []
 ncolors=['#377eb8', '#ff7f00', '#4daf4a', '#f781bf', '#a65628', '#984ea3', '#999999', '#e41a1c', '#dede00']
+ncolors=['#CC3333', '#CC3333', '#CC3333', '#CC3333', '#CC3333', '#CC3333', '#CC3333', '#0055ff']
 
 def ReadTheFile1(filename):
-	notatom=True
+	# notatom=True
 	m, atomname = [], []
 	with open(filename) as f:
 		count = 0
@@ -59,8 +60,10 @@ def PlotAtomSpectra(m, atomname, s):
 
 ########################################################
 cation = ['TEPA', 'BPy', 'Pyr14', 'BMIm', 'EMIm']
-anion = ['TFSI', 'FSI', 'BF4', 'PF6', 'BCN4', 'Cl', 'Br', 'I']
-marker = ["o", "v", "^", "p", "8", "*", "s", "d", "+"] 
+anion = ['TFSI', 'FSI', 'PF6', 'BCN4', 'Cl', 'Br', 'I', 'BF4']
+# marker = ["o", "v", "^", "p", "8", "*", "s", "d", "+"] 
+marker = ["x", "x", "x", "x", "x", "x", "x", "D"] 
+alpha = [0.45,0.45,0.45,0.45,0.45,0.45,0.45,0.9] 
 #anion = [anion[0]]
 cat = cation[4]
 namelist = []
@@ -69,7 +72,7 @@ atom='C'
 s=0.25
 count = -1
 
-plt.figure(figsize=(9/2.54,9/2.54)) 
+ax = plt.figure(figsize=(8.3/2.54,8.3/2.54)) 
 
 X, Y = [], []
 for an in anion:
@@ -86,23 +89,32 @@ for an in anion:
 	    nr_of_atom = i
 	    Y.append([m[nr_of_atom]])
 	    X.append([m1s[nr_of_atom]])
-	plt.scatter(m, m1s, c=ncolors[count], marker = marker[count], s=16, label=an)
+	if an == 'BF4':
+		bf4 = plt.scatter(m, m1s, c=ncolors[count], marker = marker[count], s=16, label=an,alpha=alpha[count],edgecolors="#333366",linewidths=0.7)
+	else:
+		plt.scatter(m, m1s, c=ncolors[count], marker = marker[count], s=16, label=an,alpha=alpha[count],edgecolors="#333366",linewidths=0.7)
 	 
 from sklearn.linear_model import LinearRegression
 reg = LinearRegression().fit(X, Y) 
-y = reg.predict(X)
-plt.plot(y, X, 'k-', lw=1.0)
+xplot = np.linspace(start=268,stop=274,num=100).reshape(-1,1)
+y = reg.predict(xplot)
+plt.plot(y, xplot, 'k-', lw=1.0,linestyle='--')
 params = {'legend.fontsize': 7}
 plt.rcParams.update(params)
-plt.legend()
 
-from sklearn.linear_model import LinearRegression
-reg = LinearRegression().fit(X, Y) 
-y = reg.predict(X)
-plt.plot(y, X, 'k-', lw=1.0)
-#plt.legend()
-plt.xlabel(r"$\Delta$" + "KS binding energy / eV")
-plt.ylabel("1s binding energy / eV")
+
+# from matplotlib.legend import Legend
+
+# leg = Legend(ax,[bf4],[r"BF$_{4}$"],loc=(0.22,0.85),
+# 	frameon=False,fancybox=True, fontsize=7,handlelength=0)
+# ax.add_artist(leg)
+
+plt.ylim(bottom=268.75, top=273)
+plt.xlim(left=289.5, right=293.25)
+plt.xticks(fontsize=7)
+plt.yticks(np.arange(269,274),fontsize=7)
+plt.xlabel(r"$\Delta$" + "KS binding energy / eV", fontsize=8)
+plt.ylabel("1s binding energy / eV", fontsize=8)
 
 plt.tight_layout()
 
