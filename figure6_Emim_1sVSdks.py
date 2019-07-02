@@ -109,10 +109,11 @@ plt.rcParams.update(params)
 # 	frameon=False,fancybox=True, fontsize=7,handlelength=0)
 # ax.add_artist(leg)
 
-plt.ylim(bottom=268.75, top=273)
+plt.ylim(bottom=267.75, top=273)
 plt.xlim(left=289.5, right=293.25)
 plt.xticks(fontsize=7)
-plt.yticks(np.arange(269,274),fontsize=7)
+plt.yticks(np.arange(268,274),fontsize=7)
+plt.yticks(np.arange(268.5,273),fontsize=7,minor=True)
 plt.xlabel(r"$\Delta$" + "KS binding energy / eV", fontsize=8)
 plt.ylabel("1s binding energy / eV", fontsize=8)
 

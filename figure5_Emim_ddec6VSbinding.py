@@ -318,7 +318,7 @@ for cat in cation:
         X2=[np.asarray(DDEC_atom_long_array[count]), np.asarray(Corrections_longCharge_array[count])]
         ###Linear correlation
         X = np.asarray(BEs_long_array[count])[:,np.newaxis]#np.asarray(BEs_long_array[count])[:, np.newaxis]
-        x_range=np.arange(289,296,0.1)
+        x_range=np.arange(288,296,0.1)
 
         print(an)
         
@@ -358,7 +358,7 @@ for cat in cation:
 
             ax.scatter(BEs_long_array[count], BEs_corr_charge,
                        color='#aa0a3c',
-                       marker='D',alpha=1, s=16,
+                       marker='x',alpha=0.45, s=16,
                        edgecolors="#333366",linewidths=0.7,label="q")
 #            ax.scatter(BEs_long_array[count], BEs_corr_charge_q,
 #                       color='#4daf4a',
@@ -367,10 +367,12 @@ for cat in cation:
 #            ax.plot(x_range, y_qq, color='#4daf4a')
 
             ax.scatter(BEs_long_array[count], BEs_corr_charge_qd,
-                       color='#4daf4a',
+                       color = '#0055ff',
+                    #    color='#4daf4a',
                        marker='D',alpha=1, s=16,edgecolors="#333366",linewidths=0.7,
-                       label="q+q_i+dip")
-            ax.plot(x_range, y_qqd, color='#4daf4a')
+                       label="q+q_i+dip",
+                       zorder= 99)
+            ax.plot(x_range, y_qqd, color='#000000',linestyle='--',linewidth=1.2,zorder=0)
 
             
 
@@ -394,14 +396,18 @@ for cat in cation:
             #Corrected points
             ax.scatter(BEs_long_array[count],#BEs_long_array[count],
                         BEs_corr_charge_q, c='#4daf4a',#"#33cc33",
-                       marker = marker[count],
+                       marker = '+',
                     alpha=alpha[count], s=16, label='_nolegend_',
                        edgecolors="#333366",
                        linewidths=0.7)
 
 
 
-ax.tick_params(axis='x', which='both', direction='inout')
+# ax.tick_params(axis='x', which='both', direction='inout')
+ax.set_ylim(bottom=285.5, top=296)
+ax.set_xlim(left=289.5, right=293.25)
+plt.xticks(fontsize=7)
+plt.yticks(fontsize=7)
 ax.set_xlabel(r"$\Delta$" + "KS binding energy / eV",fontsize=8)
 ax.set_ylabel(r"$f(q,d)$ BE / eV",fontsize=8)
 #ax.legend(prop={'size': 8})
