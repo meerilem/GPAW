@@ -109,7 +109,7 @@ cation = 'BMIm'
 namelist1 = [cation + anion for anion in anions]
 numbers = [0, 1, 2, 3, 4, 5, 6, 7]
 filename = ""
-plotFinalSpectra(namelist1, numbers, 3.0, [1,0], ncolors, ax1)
+plotFinalSpectra(namelist1, numbers, 2.0, [1,0], ncolors, ax1)
 
 nr = [1, 3, 4, 5, 6, 7]
 namelist2 = []
@@ -123,7 +123,7 @@ cation = 'Pyr14'
 namelist1 = [cation + anion for anion in anions]
 numbers = [0, 1, 2, 3, 4, 5, 6, 7]
 filename = ""
-plotFinalSpectra(namelist1, numbers, 3.0, [1,0], ncolors, ax2)
+plotFinalSpectra(namelist1, numbers, 2.0, [1,0], ncolors, ax2)
 
 nr = [1, 3, 7]
 namelist2 = []
@@ -142,7 +142,7 @@ plt.xticks([282,283,284,285,286],fontsize=7)
 namelist1 = ['EMImBCN4', 'EMImTFSI', 'EMImFSI','EMImPF6', 'EMImBF4', 'EMImCl', 'EMImBr', 'EMImI']
 numbers = [0, 1, 2, 3, 4, 5, 6, 7]
 filename = ""
-plotFinalSpectra(namelist1, numbers, 3.0, [1,0], ncolors,ax0)
+plotFinalSpectra(namelist1, numbers, 2.0, [1,0], ncolors,ax0)
 
 	
 namelist2 = ['EMImTFSI','EMImPF6', 'EMImBF4', 'EMImCl', 'EMImBr', 'EMImI']
@@ -179,6 +179,10 @@ plotFinalSpectra(namelist2, nr, 1.0, [4,1,4,1,1,1,1,1], black,ax0)
 ax0.set_xlim(283.7,289.3)
 ax0.set_xticks([284,285,286,287,288,289])
 ax0.tick_params(axis='both', which='both', labelsize=7)
+
+ax0.set_xticks([284.5,285.5,286.5,287.5,288.5],minor=True)
+ax1.set_xticks([284.5,285.5,286.5,287.5,288.5],minor=True)
+ax2.set_xticks([282.5,283.5,284.5,285.5,286.5],minor=True)
 
 #* Figure 3 done
 
