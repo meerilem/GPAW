@@ -57,10 +57,10 @@ def plotAtomSpectra(m, atomname, s, y_position, dashes):
         # plt.plot(w, gaussian(w, m[i], s) + y_position, label=atomname[i], color=ncolors[i], dashes=dashes)
         y_pos = sum([gaussian(m[i],m[j],s) for j in range(len(m))])
         plt.scatter(m[i],y_pos + y_position,color='crimson',s=7)
-        y_pos += 0.5 #* Offset
+        y_pos += 0.6 #* Offset
         for j in range(i):
             if abs(m[i] - m[j]) < 0.1:
-                y_pos += -1.4
+                y_pos += -1.6
         # if i == 0: #* Lower C6
         #     y_pos = 0
         # if i == 2: #* Lower C1 but not as much
@@ -140,6 +140,7 @@ for item in legends:
 	plt.text(*item, horizontalalignment='right', rotation=0, size=7, color='k')
 
 plt.xlim(283.9,289.1)
+plt.ylim(-6,21)
 plt.ylabel("intensity / arb. units",fontsize=8)
 plt.xlabel("binding energy / eV",fontsize=8)
 plt.xticks(fontsize=7)
