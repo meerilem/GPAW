@@ -188,17 +188,35 @@ ax2.set_xticks([282.5,283.5,284.5,285.5,286.5],minor=True)
 
 #* Text legends
 scale = 6.25
-legends = [ [289.2,  4, r"EMImB(CN)$_{4}$"],
-			[289.2, 10, r"EMImTFSI"],
-			[289.2, 15.75, r"EMImFSI"],
-			[289.2, 21.75, r"EMImPF$_{6}$"],
-			[289.2, 28, r"EMImBF$_{4}$"],
-			[289.2, 34.0, r"EMImCl"],
-			[289.2, 40.25, r"EMImBr"],
-			[289.2, 46.5, r"EMImI"]]
+legends = [ [289.2,  4,    r"[B(CN)$_{4}$]$^{-}$"],
+			[289.2, 10,    r"[TFSI]$^{-}$"],
+			[289.2, 15.75, r"[FSI]$^{-}$"],
+			[289.2, 21.75, r"[PF$_{6}$]$^{-}$"],
+			[289.2, 28,    r"[BF$_{4}$]$^{-}$"],
+			[289.2, 34.0,  r"[Cl]$^{-}$"],
+			[289.2, 40.25, r"[Br]$^{-}$"],
+			[289.2, 46.5,  r"[I]$^{-}$"]]
 
 for item in legends:
 	ax0.text(*item, horizontalalignment='right', rotation=0, size=7, color='k')
+
+# Extra space in string for padding to offset + sign
+topnames = [r" [EMIm]$^{+}$",
+			r" [BMIm]$^{+}$",
+			r" [BMPyr]$^{+}$"]
+
+# Hardcoded xlims, adjust if needed
+ax0.text((283.7+289.3)/2,50.75,topnames[0],
+			horizontalalignment='center', rotation=0, 
+			size=7, color='k')
+
+ax1.text((283.8+288.7)/2,50.75,topnames[1],
+			horizontalalignment='center', rotation=0, 
+			size=7, color='k')
+
+ax2.text((282+286.5)/2,50.75,topnames[2],
+			horizontalalignment='center', rotation=0, 
+			size=7, color='k')
 
 
 #plt.title(r"%s %s1s XPS spectra" % ('EMIm cation', atom))
