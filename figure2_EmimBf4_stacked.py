@@ -60,7 +60,7 @@ def plotFinalSpectra(lineW, dashes, y_pos):
 	m, atomname = [], []
 	m, atomname = readTheFile('./data/' + name + '/' + name + filename + '.out')
 	m_tmp, atomname = getListOfAtoms(atom, m, atomname)
-	m2 = [x+aliphatic-m_tmp[0] for x in m_tmp]
+	m2 = [x+aliphatic-min(m_tmp) for x in m_tmp]
 	w, t = plotAtomSpectra(m2, atomname , s, y_pos, dashes)
 	plt.plot(w, t, linewidth=lineW, color='k', dashes=dashes)	
 ########################################################
@@ -126,6 +126,6 @@ plt.ylabel("intensity / arb. units",fontsize=8)
 plt.xlabel("binding energy / eV",fontsize=8)
 fig.tight_layout()
 fig.savefig('./figures_for_article/figure2_EmimBf4_stacked.png', format="png", dpi=300, bbox_inches='tight')
-fig.savefig('./figures_for_article/figure2_EmimBf4_stacked.svg', format="svg", dpi=2000, bbox_inches='tight')
-fig.savefig('./figures_for_article/figure2_EmimBf4_stacked.eps', format="eps", dpi=2000, bbox_inches='tight')
+#fig.savefig('./figures_for_article/figure2_EmimBf4_stacked.svg', format="svg", dpi=2000, bbox_inches='tight')
+#fig.savefig('./figures_for_article/figure2_EmimBf4_stacked.eps', format="eps", dpi=2000, bbox_inches='tight')
 

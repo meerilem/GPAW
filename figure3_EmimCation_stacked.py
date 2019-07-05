@@ -56,7 +56,7 @@ def plotFinalSpectra(namelist, nr, lineW, dashes, ncolors, plot_list):
 		m, atomname = [], []
 		m, atomname = readTheFile('./data/' + name + '/' + name + filename + '.out')
 		m_tmp, atomname = getListOfAtoms(atom, m, atomname)
-		m2 = [x+aliphatic-m_tmp[0] for x in m_tmp]
+		m2 = [x+aliphatic-min(m_tmp) for x in m_tmp]
 		w_tmp, t_tmp = plotAtomSpectra(m2, atomname , s)
 		w.append(w_tmp)
 		new_list = [x+nr[count]*4 for x in t_tmp]
@@ -166,8 +166,8 @@ plt.xlabel("binding energy / eV",fontsize=8)
 plt.xlim(283.5,288.7)
 plt.tight_layout()
 plt.savefig('./figures_for_article/figure3_EmimCation_stacked.png', format="png", dpi=300, bbox_inches='tight')
-plt.savefig('./figures_for_article/figure3_EmimCation_stacked.svg', format="svg", dpi=2000, bbox_inches='tight')
-plt.savefig('./figures_for_article/figure3_EmimCation_stacked.eps', format="eps", dpi=2000, bbox_inches='tight')
+#plt.savefig('./figures_for_article/figure3_EmimCation_stacked.svg', format="svg", dpi=2000, bbox_inches='tight')
+#plt.savefig('./figures_for_article/figure3_EmimCation_stacked.eps', format="eps", dpi=2000, bbox_inches='tight')
 
 
 

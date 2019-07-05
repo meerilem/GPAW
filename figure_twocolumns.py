@@ -57,7 +57,7 @@ def plotFinalSpectra(namelist, nr, lineW, dashes, ncolors, plt):
 		m, atomname = [], []
 		m, atomname = readTheFile('./data/' + name + '/' + name + filename + '.out')
 		m_tmp, atomname = getListOfAtoms(atom, m, atomname)
-		m2 = [x+aliphatic-m_tmp[0] for x in m_tmp]
+		m2 = [x+aliphatic-min(m_tmp) for x in m_tmp]
 		w_tmp, t_tmp = plotAtomSpectra(m2, atomname , s)
 		w.append(w_tmp)
 		new_list = [x+nr[count]*scale for x in t_tmp]

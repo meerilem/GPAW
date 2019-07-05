@@ -56,7 +56,7 @@ def plotFinalSpectra(namelist, nr, lineW, dashes, ncolors, plt):
 		m, atomname = [], []
 		m, atomname = readTheFile('./data/' + name + '/' + name + filename + '.out')
 		m_tmp, atomname = getListOfAtoms(atom, m, atomname)
-		m2 = [x+aliphatic-m_tmp[0] for x in m_tmp]
+		m2 = [x+aliphatic-min(m_tmp) for x in m_tmp]
 		w_tmp, t_tmp = plotAtomSpectra(m2, atomname , s)
 		w.append(w_tmp)
 		new_list = [x+nr[count]*4 for x in t_tmp]
@@ -111,8 +111,8 @@ for x in nr:
 filename = "_Men"
 plotFinalSpectra(namelist2, nr, 1.0, [4,1,4,1], black, ax2)
 
-ax2.set_xlim(282, 286.5)
-plt.xticks([282,283,284,285,286],fontsize=7)
+ax2.set_xlim(284, 288.7)
+plt.xticks(fontsize=7)
 #plt.title(r"%s %s1s XPS spectra" % ('EMIm cation', atom))
 ax1.tick_params(axis='both', which='both', labelsize=7)
 ax2.tick_params(axis='both', which='both', labelsize=7)
@@ -125,8 +125,8 @@ ax2.set_xlabel("binding energy / eV",fontsize=8)
 #plt.tick_params(labelsize=16)
 plt.tight_layout()
 plt.savefig('./figures_for_article/figure4_two_figures_stackedCations.png', format="png", dpi=300, bbox_inches='tight')
-plt.savefig('./figures_for_article/figure4_two_figures_stackedCations.tiff', format="tiff", dpi=2000, bbox_inches='tight')
-plt.savefig('./figures_for_article/figure4_two_figures_stackedCations.eps', format="eps", dpi=2000, bbox_inches='tight')
+#plt.savefig('./figures_for_article/figure4_two_figures_stackedCations.tiff', format="tiff", dpi=2000, bbox_inches='tight')
+#plt.savefig('./figures_for_article/figure4_two_figures_stackedCations.eps', format="eps", dpi=2000, bbox_inches='tight')
 
 
 
