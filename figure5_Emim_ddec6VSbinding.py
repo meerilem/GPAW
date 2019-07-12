@@ -144,7 +144,7 @@ def func2(Z, c):
 
 #Fitting charge, neighbours charge and dipoles
 from scipy.optimize import curve_fit
-def func3(Z,c): 
+def func3(Z, c): 
     chg, corr1, corr2 = Z
     return 18.8*chg+14.4*corr1+14.4*corr2+c
 
@@ -397,19 +397,20 @@ for cat in cation:
             ax.scatter(BEs_long_array[count],#BEs_long_array[count],
                         BEs_corr_charge_q, c='#4daf4a',#"#33cc33",
                        marker = '+',
-                    alpha=alpha[count], s=16, label='_nolegend_',
+                    alpha=alpha[count], s=24, label='_nolegend_',
                        edgecolors="#333366",
                        linewidths=0.7)
 
 
 
 # ax.tick_params(axis='x', which='both', direction='inout')
-ax.set_ylim(bottom=285.5, top=296)
-ax.set_xlim(left=289.5, right=293.25)
+ax.set_xlim(left=288.8, right=293.8)
+ax.set_ylim(bottom=286.2, top=296.2)
 plt.xticks(fontsize=7)
 plt.yticks(fontsize=7)
+plt.minorticks_on()
 ax.set_xlabel(r"$\Delta$" + "KS binding energy / eV",fontsize=8)
-ax.set_ylabel(r"$f(q,d)$ BE / eV",fontsize=8)
+ax.set_ylabel(r"$V(q)$ binding energy / eV",fontsize=8)
 #ax.legend(prop={'size': 8})
 
 
@@ -466,5 +467,4 @@ df.to_excel("./CorrelationData.xlsx")
 
 #Save figure
 f1.savefig('./figures_for_article/figure5_ChargeVSSpectra_%s%s_DDEC6.png' % (cation[0],"all"), format="png", dpi=300, bbox_inches='tight')
-f1.savefig('./figures_for_article/figure5_ChargeVSSpectra_%s%s_DDEC6.png' % (cation[0],"all"), format="png", dpi=300, bbox_inches='tight')
-
+f1.savefig('./figures_for_article/figure5_ChargeVSSpectra_%s%s_DDEC6.svg' % (cation[0],"all"), format="svg", dpi=600, bbox_inches='tight')

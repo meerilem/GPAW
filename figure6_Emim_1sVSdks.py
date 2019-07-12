@@ -1,7 +1,6 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
-
 numberlist = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0']
 atomname, m = [], []
 ncolors=['#377eb8', '#ff7f00', '#4daf4a', '#f781bf', '#a65628', '#984ea3', '#999999', '#e41a1c', '#dede00']
@@ -109,17 +108,14 @@ plt.rcParams.update(params)
 # 	frameon=False,fancybox=True, fontsize=7,handlelength=0)
 # ax.add_artist(leg)
 
-plt.ylim(bottom=267.75, top=273)
-plt.xlim(left=289.5, right=293.25)
+plt.xlim(left=288.8, right=293.8)
+plt.ylim(bottom=268.2, top=273.2)
 plt.xticks(fontsize=7)
-plt.yticks(np.arange(268,274),fontsize=7)
-plt.yticks(np.arange(268.5,273),fontsize=7,minor=True)
+plt.yticks(fontsize=7)
+plt.minorticks_on()
 plt.xlabel(r"$\Delta$" + "KS binding energy / eV", fontsize=8)
 plt.ylabel("1s binding energy / eV", fontsize=8)
-
 plt.tight_layout()
-
 plt.savefig('./figures_for_article/figure6_Spectra1sVSSpectradKs_%s%s.png' % (cation[0],"all"), dpi=300, bbox_inches='tight')
-plt.savefig('./figures_for_article/figure6_Spectra1sVSSpectradKs_%s%s.eps' % (cation[0],"all"), dpi=2000, bbox_inches='tight')
-plt.savefig('./figures_for_article/figure6_Spectra1sVSSpectradKs_%s%s.svg' % (cation[0],"all"), dpi=2000, bbox_inches='tight')
-
+plt.savefig('./figures_for_article/figure6_Spectra1sVSSpectradKs_%s%s.svg' % (cation[0],"all"), dpi=600, bbox_inches='tight')
+#plt.savefig('./figures_for_article/figure6_Spectra1sVSSpectradKs_%s%s.eps' % (cation[0],"all"), dpi=2000, bbox_inches='tight')

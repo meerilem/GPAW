@@ -57,10 +57,10 @@ def plotAtomSpectra(m, atomname, s, y_position, dashes):
         # plt.plot(w, gaussian(w, m[i], s) + y_position, label=atomname[i], color=ncolors[i], dashes=dashes)
         y_pos = sum([gaussian(m[i],m[j],s) for j in range(len(m))])
         plt.scatter(m[i],y_pos + y_position,color='crimson',s=7)
-        y_pos += 0.6 #* Offset
+        y_pos += 0.7 #* Offset
         for j in range(i):
             if abs(m[i] - m[j]) < 0.1:
-                y_pos += -1.6
+                y_pos += -1.85
         # if i == 0: #* Lower C6
         #     y_pos = 0
         # if i == 2: #* Lower C1 but not as much
@@ -89,7 +89,7 @@ def plotFinalSpectra(lineW, dashes, y_pos):
 s = 0.5
 atom = 'C'
 
-fig = plt.figure(figsize=(8.3/2.54,12/2.54))
+fig = plt.figure(figsize=(8.3/2.54,10/2.54))
 #fig, ax = plt.subplots()
 
 butane = 289.65
@@ -131,10 +131,10 @@ plotFinalSpectra(linewidth, [1,1,1,1,3,1], -scale_factor)
 #* Legend
 
 legends = [ [288.8, 16.25, r"Schmitz"],
-			[288.8, 11.25, r"Tonisoo"],
+			[288.8, 11.25, r"$\mathrm{T\~{o}nisoo}$"],
 			[288.8,  6.25, r"Garcia"],
-			[288.8,  0.75, r"$\Delta$KS"],
-			[288.8, -3.75, r"1s"]]
+			[288.8,  1.25, r"$\Delta$KS"],
+			[288.8, -4.25, r"1s"]]
 
 for item in legends:
 	plt.text(*item, horizontalalignment='right', rotation=0, size=7, color='k')
@@ -162,7 +162,7 @@ plt.yticks([])
 plt.ylabel("intensity / arb. units",fontsize=8)
 plt.xlabel("binding energy / eV",fontsize=8)
 fig.tight_layout()
-fig.savefig('./figures_for_article/figure2_clean.png', format="png", dpi=300, bbox_inches='tight')
-# fig.savefig('./figures_for_article/figure2_EmimBf4_stacked.svg', format="svg", dpi=2000, bbox_inches='tight')
+fig.savefig('./figures_for_article/figure2.png', format="png", dpi=300, bbox_inches='tight')
+fig.savefig('./figures_for_article/figure2.svg', format="svg", dpi=600, bbox_inches='tight')
 # fig.savefig('./figures_for_article/figure2_EmimBf4_stacked.eps', format="eps", dpi=2000, bbox_inches='tight')
 

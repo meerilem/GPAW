@@ -125,9 +125,5 @@ ax2.set_xlabel("binding energy / eV",fontsize=8)
 #plt.tick_params(labelsize=16)
 plt.tight_layout()
 plt.savefig('./figures_for_article/figure4_two_figures_stackedCations.png', format="png", dpi=300, bbox_inches='tight')
-#plt.savefig('./figures_for_article/figure4_two_figures_stackedCations.tiff', format="tiff", dpi=2000, bbox_inches='tight')
+plt.savefig('./figures_for_article/figure4_two_figures_stackedCations.svg', format="svg", dpi=600, bbox_inches='tight')
 #plt.savefig('./figures_for_article/figure4_two_figures_stackedCations.eps', format="eps", dpi=2000, bbox_inches='tight')
-
-
-
-
