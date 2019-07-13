@@ -167,16 +167,16 @@ filename = '_Reinmoller'
 plotFinalSpectra(namelist2, nr, 1.0, [4,1,4,1,1,1,1,1], black,ax0)
 
 
-ax0.set_xlim(283.5,289.5)
-ax0.set_xticks([284,285,286,287,288,289])
+ax0.set_xlim(283.8,288.8)
+ax0.set_xticks([284,285,286,287,288])
 ax0.tick_params(axis='both', which='both', labelsize=7)
 
-ax1.set_xlim(283.5,289.5)
-ax1.set_xticks([284,285,286,287,288,289])
+ax1.set_xlim(283.8,288.8)
+ax1.set_xticks([284,285,286,287,288])
 ax1.tick_params(axis='both', which='both', labelsize=7)
 
-ax2.set_xlim(283.5,289.5)
-ax2.set_xticks([284,285,286,287,288,289])
+ax2.set_xlim(283.8,288.8)
+ax2.set_xticks([284,285,286,287,288])
 ax2.tick_params(axis='both', which='both', labelsize=7)
 
 #ax0.set_xticks([284.5,285.5,286.5,287.5,288.5],minor=True)
@@ -205,20 +205,23 @@ topnames = [r" [EMIm]$^{+}$",
 			r" [BMPyr]$^{+}$"]
 
 # Hardcoded xlims, adjust if needed
-ax0.text((283.5+289.5)/2,53.75,topnames[0],
+ax0.text((283.8+288.8)/2,53.75,topnames[0],
 			horizontalalignment='center', rotation=0, 
 			size=7, color='k')
 
-ax1.text((283.5+289.5)/2,53.75,topnames[1],
+ax1.text((283.8+288.8)/2,53.75,topnames[1],
 			horizontalalignment='center', rotation=0, 
 			size=7, color='k')
 
-ax2.text((283.5+289.5)/2,53.75,topnames[2],
+ax2.text((283.8+288.8)/2,53.75,topnames[2],
 			horizontalalignment='center', rotation=0, 
 			size=7, color='k')
 
 ax1.tick_params(axis='both', which='both', labelsize=7)
 ax2.tick_params(axis='both', which='both', labelsize=7)
+ax0.minorticks_on()
+ax1.minorticks_on()
+ax2.minorticks_on()
 ax1.set_yticks([])
 ax0.set_ylabel("intensity / arb. units",fontsize=8)
 ax0.set_xlabel("binding energy / eV",fontsize=8)

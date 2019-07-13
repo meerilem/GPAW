@@ -141,6 +141,7 @@ for item in legends:
 
 plt.xlim(283.9,289.1)
 plt.ylim(-6,21)
+plt.minorticks_on()
 plt.ylabel("intensity / arb. units",fontsize=8)
 plt.xlabel("binding energy / eV",fontsize=8)
 plt.xticks(fontsize=7)
