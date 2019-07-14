@@ -125,28 +125,45 @@ def GetListOfAtoms(atom):
 
 
 #Fitting only charge
+#def func1(Z, c): 
+#    chg, corr = Z
+#    return 18.8*chg+c
+
+#Update, specific constants
 def func1(Z, c): 
     chg, corr = Z
-    return 18.8*chg+c
+    return 13.45*chg+292.32
+
 
 
 # In[3]:
 
 
 #Fitting only charge and neighbours charge
+#def func2(Z, c): 
+#    chg, corr = Z
+#    return 18.8*chg+14.4*corr+c
+
+#Update, specific constants
 def func2(Z, c): 
     chg, corr = Z
-    return 18.8*chg+14.4*corr+c
+    return 2.2284*chg**2+13.669*chg+298.83
 
 
 # In[4]:
 
 
 #Fitting charge, neighbours charge and dipoles
+#from scipy.optimize import curve_fit
+#def func3(Z, c): 
+#    chg, corr1, corr2 = Z
+#    return 18.8*chg+14.4*corr1+14.4*corr2+c
+
+#Update, specific constants
 from scipy.optimize import curve_fit
 def func3(Z, c): 
     chg, corr1, corr2 = Z
-    return 18.8*chg+14.4*corr1+14.4*corr2+c
+    return 2.2284*chg**2+13.669*chg+298.83
 
 
 # In[5]:
@@ -209,7 +226,7 @@ f1.subplots_adjust(hspace=0)
 # In[8]:
 
 
-df=pd.DataFrame(columns=['Cation', 'Anion', 'q R2', 'f(q) R2', 'f(q,d) R2'])
+df=pd.DataFrame(columns=['Cation', 'Anion', 'f(q, linear) R2', 'f(q, square function) R2', 'f(q, square function) R2'])
 
 
 # In[9]:
@@ -337,7 +354,7 @@ for cat in cation:
         BEs_corr_charge_q = func2(X2, *popt_qq)
         reg_qq = LinearRegression().fit(X, BEs_corr_charge_q)
         y_qq=reg_qq.predict(x_range[:, np.newaxis])        
-        print("f(q) R2=" + str(reg_qq.score(X, BEs_corr_charge_q)))      
+#        print("f(q, linear function) R2=" + str(reg_qq.score(X, BEs_corr_charge_q)))      
 
         ##Charge, neighbours, dipoles
         X3 = [np.asarray(DDEC_atom_long_array[count]), np.asarray(Corrections_longCharge_array[count]),
@@ -346,11 +363,11 @@ for cat in cation:
         BEs_corr_charge_qd = func3(X3, *popt_qqd)
         reg_qqd = LinearRegression().fit(X, BEs_corr_charge_qd)
         y_qqd=reg_qqd.predict(x_range[:, np.newaxis])           
-        print("f(q,d) R2=" + str(reg_qqd.score(X, BEs_corr_charge_qd)))
+        print("f(q, square function) R2=" + str(reg_qqd.score(X, BEs_corr_charge_qd)))
         
         #Saving correlation factors to dataframe
         df2 = pd.DataFrame([[cat, an, reg_q.score(X, BEs_corr_charge), reg_qq.score(X, BEs_corr_charge_q), reg_qqd.score(X, BEs_corr_charge_qd)]],
-                           columns=['Cation', 'Anion', 'q R2', 'f(q) R2', 'f(q,d) R2'])
+                           columns=['Cation', 'Anion', 'f(q, linear) R2', 'f(q, square function) R2', 'f(q, square function) R2'])
         df=df.append(df2, ignore_index=True)
 
         if(an==specialAnion):
@@ -404,8 +421,8 @@ for cat in cation:
 
 
 # ax.tick_params(axis='x', which='both', direction='inout')
-ax.set_xlim(left=288.8, right=293.8)
-ax.set_ylim(bottom=286.2, top=296.2)
+ax.set_xlim(left=288.4, right=293.4)
+ax.set_ylim(bottom=288.2, top=302)
 plt.xticks(fontsize=7)
 plt.yticks(fontsize=7)
 plt.minorticks_on()
@@ -415,9 +432,6 @@ ax.set_ylabel(r"$V(q)$ binding energy / eV",fontsize=8)
 
 
 # In[11]:
-
-
-f1
 
 
 # In[12]:
@@ -441,7 +455,7 @@ popt_qq, pcov_qq = curve_fit(func2, [np.asarray(DDEC_atom_long), np.asarray(Corr
 BEs_corr_charge_q = func2([np.asarray(DDEC_atom_long), np.asarray(Corrections_longCharge)], *popt_qq)
 reg_qq = LinearRegression().fit(np.asarray(BEs_long)[:,np.newaxis], BEs_corr_charge_q)
 y_qq=reg_qq.predict(x_range[:, np.newaxis])        
-print("f(q) R2=" + str(reg_qq.score(np.asarray(BEs_long)[:,np.newaxis], BEs_corr_charge_q)))       
+#print("f(q, linear) R2=" + str(reg_qq.score(np.asarray(BEs_long)[:,np.newaxis], BEs_corr_charge_q)))       
 
 ##Charge, neighbours, dipoles
 S3 = [np.asarray(DDEC_atom_long), np.asarray(Corrections_longCharge),
@@ -450,14 +464,14 @@ popt_qqd, pcov_qqd = curve_fit(func3, S3, BEs_long)
 BEs_corr_charge_qd = func3(S3, *popt_qqd)
 reg_qqd = LinearRegression().fit(np.asarray(BEs_long)[:,np.newaxis], BEs_corr_charge_qd)
 y_qqd=reg_qqd.predict(x_range[:, np.newaxis])           
-print("f(q,d) R2=" + str(reg_qqd.score(np.asarray(BEs_long)[:,np.newaxis], BEs_corr_charge_qd)))
+print("f(q, square function) R2=" + str(reg_qqd.score(np.asarray(BEs_long)[:,np.newaxis], BEs_corr_charge_qd)))
 
 
 # In[14]:
 
 
 df2 = pd.DataFrame([["Set", "Set", reg_q.score(np.asarray(BEs_long)[:,np.newaxis], BEs_corr_charge), reg_qq.score(np.asarray(BEs_long)[:,np.newaxis], BEs_corr_charge_q), reg_qqd.score(np.asarray(BEs_long)[:,np.newaxis], BEs_corr_charge_qd)]],
-                    columns=['Cation', 'Anion', 'q R2', 'f(q) R2', 'f(q,d) R2'])
+                    columns=['Cation', 'Anion', 'f(q, linear) R2', 'f(q, square function) R2', 'f(q, square function) R2'])
 df=df.append(df2, ignore_index=True)
 df.to_excel("./CorrelationData.xlsx")
 
