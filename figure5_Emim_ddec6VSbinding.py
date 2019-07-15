@@ -225,13 +225,13 @@ df=pd.DataFrame(columns=['Cation', 'Anion', 'f(q, k=18.8) R2', 'f(q, V, k=18.8) 
 ncolors=["#33cc33"]*8
 
 ########################################################
-cation = ['TEPA', 'BPy', 'Pyr14', 'BMIm', 'EMIm'] #Cations array
+cation = ['TEPA', 'BPy', 'Pyr14','BMIm', 'EMIm'] #Cations array
 anion = ['TFSI', 'FSI', 'BF4', 'PF6', 'BCN4', 'Cl', 'Br', 'I'] #Anions Array
 
 marker = ["x", "x", "x", "x", "x", "x", "x", "x"] 
 alpha = [0.45,0.45,0.45,0.45,0.45,0.45,0.45,0.45] 
 
-cation = [cation[4]]
+#cation = [cation[3]]
 
 X, Y = [], []
 nr_of_atom = 4
@@ -244,14 +244,15 @@ DDEC_atom_long_array = [] #Array of DDEC 6 charges where each ion is in separate
 Corrections_longCharge=[] #One long array of corrections to fit function
 Corrections_longCharge_array=[] #Array of corrections where each ion is in separate array
 
-Corrections_longDipole=[] #One long array of corrections to fit function
-Corrections_longDipole_array=[] #Array of corrections where each ion is in separate array
+#Corrections_longDipole=[] #One long array of corrections to fit function
+#Corrections_longDipole_array=[] #Array of corrections where each ion is in separate array
 
 BEs_long=[] #One long array of BEs to fit function
 BEs_long_array=[] #Array of binding energies where each ion is in separate array
 
 
 specialAnion="BF4" #The anion we want to show
+specialCation = "EMIm"
 
 count = -1
 #Iterating over list of cations and anions
@@ -272,18 +273,18 @@ for cat in cation:
         atom, DDEC, bader, catan = ReadChargeFile('./data/' + cat + an + '/' + cat + an + '_charges.out')
         
         #Read in dipoles from DDEC .xyz (only returns dipoles)
-        dipoles = readDipoles('./data/' + cat + an + '/DDEC6_charge.xyz')
+#        dipoles = readDipoles('./data/' + cat + an + '/DDEC6_charge.xyz')
         
         #Read in coordinates from .xyz file and calculate correction
         coords = ReadCoordinates('./data/' + cat + an + '/' + cat + an + '.xyz')
         
         #Calculate corrections from coordinates, charge and dipoles
         BE_correctionsCharge = CalculateCorrCharge(coords, DDEC) #Correction of neighboring atoms charges
-        BE_correctionsDipole = CalculateCorrDip(coords, DDEC, dipoles) #Correction of neighboring atoms dipoles
-        
+#        BE_correctionsDipole = CalculateCorrDip(coords, DDEC, dipoles) #Correction of neighboring atoms dipoles
+                
         #Cut list of corrections to leave only chosen atoms
         BE_corrections_atomCharge, idk = SortCharges(atom, BE_correctionsCharge, bader, whatAtom)
-        BE_corrections_atomDipole, idk = SortCharges(atom, BE_correctionsDipole, bader, whatAtom)
+#        BE_corrections_atomDipole, idk = SortCharges(atom, BE_correctionsDipole, bader, whatAtom)
 
         
         DDEC_cat, DDEC_an, bader_cat, bader_an = Charges(DDEC, bader, catan)
@@ -298,8 +299,8 @@ for cat in cation:
         Corrections_longCharge+=BE_corrections_atomCharge
         Corrections_longCharge_array+=[BE_corrections_atomCharge]
 
-        Corrections_longDipole+=BE_corrections_atomDipole
-        Corrections_longDipole_array+=[BE_corrections_atomDipole]
+#        Corrections_longDipole+=BE_corrections_atomDipole
+#        Corrections_longDipole_array+=[BE_corrections_atomDipole]
 
         
         DDEC_atom_long+=DDEC_atom
@@ -381,7 +382,7 @@ for cat in cation:
                            columns=['Cation', 'Anion', 'f(q, k=18.8) R2', 'f(q, V, k=18.8) R2', 'f(q, V, k=13.45) R2'])
         df=df.append(df2, ignore_index=True)
 
-        if(an==specialAnion):
+        if(an==specialAnion and cat == specialCation):
 
 
             ax.scatter(BEs_long_array[count], BEs_corr_charge,
@@ -396,7 +397,7 @@ for cat in cation:
                        marker='D',alpha=1, s=16,edgecolors="#333366",linewidths=0.7,
                        label="q+q_i+dip",
                        zorder= 99)
-            ax.plot(x_range, y_qq, color='#000000',linestyle='--',linewidth=1.2,zorder=0)
+            ax.plot(x_range, y_qq, color='#000000',linestyle='--',linewidth=1.2)
 
 #            ax.scatter(BEs_long_array[count], BEs_corr_charge_qd,
 #                       color = '#0055ff',
@@ -420,8 +421,8 @@ for cat in cation:
         else:
             #Not corrected points
             ax.scatter(BEs_long_array[count],#BEs_long_array[count],
-                        BEs_corr_charge, c='#aa0a3c', marker = marker[count],
-                    alpha=alpha[count], s=16, label='_nolegend_',
+                        BEs_corr_charge, c='#aa0a3c', marker = 'x',
+                    alpha=0.45, s=16, label='_nolegend_',
                        edgecolors="#333366",
                        linewidths=0.7)
             
@@ -429,15 +430,16 @@ for cat in cation:
             ax.scatter(BEs_long_array[count],#BEs_long_array[count],
                         BEs_corr_charge_q, c='#4daf4a',#"#33cc33",
                        marker = '+',
-                    alpha=alpha[count], s=24, label='_nolegend_',
+                    alpha=0.45, s=24, label='_nolegend_',
                        edgecolors="#333366",
                        linewidths=0.7)
 
-
+        print(BEs_long_array[count])
+        print(BEs_corr_charge)
 
 # ax.tick_params(axis='x', which='both', direction='inout')
-ax.set_xlim(left=284, right=291)
-ax.set_ylim(bottom=283, top=296)
+#ax.set_xlim(left=284, right=291)
+#ax.set_ylim(bottom=283, top=296)
 plt.xticks(fontsize=7)
 plt.yticks(fontsize=7)
 plt.minorticks_on()
@@ -472,8 +474,8 @@ y_qq=reg_qq.predict(x_range[:, np.newaxis])
 print("f(q, V, k=18.8) R2=" + str(reg_qq.score(np.asarray(BEs_long)[:,np.newaxis], BEs_corr_charge_q)))       
 
 ##Charge, neighbours, dipoles
-S3 = [np.asarray(DDEC_atom_long), np.asarray(Corrections_longCharge),
-        np.asarray(Corrections_longDipole)]
+#S3 = [np.asarray(DDEC_atom_long), np.asarray(Corrections_longCharge),
+#        np.asarray(Corrections_longDipole)]
 popt_qqd, pcov_qqd = curve_fit(func3, S2, BEs_long)
 BEs_corr_charge_qd = func3(S2, *popt_qqd)
 reg_qqd = LinearRegression().fit(np.asarray(BEs_long)[:,np.newaxis], BEs_corr_charge_qd)
