@@ -187,22 +187,22 @@ ax2.tick_params(axis='both', which='both', labelsize=7)
 
 #* Text legends
 scale = 6.25
-legends = [ [289.7,  0.00, r"[B(CN)$_{4}$]$^{-}$"],
-			[289.7,  6.26, r"[TFSI]$^{-}$"],
-			[289.7, 12.50, r"[FSI]$^{-}$"],
-			[289.7, 18.74, r"[PF$_{6}$]$^{-}$"],
-			[289.7, 24.98, r"[BF$_{4}$]$^{-}$"],
-			[289.7, 31.22, r"[Cl]$^{-}$"],
-			[289.7, 37.46, r"[Br]$^{-}$"],
-			[289.7, 43.70, r"[I]$^{-}$"]]
+legends = [ [289.0,  0.00, r"B(CN)$_{4}^{-}$"],
+			[289.0,  6.26, r"TFSI$^{-}$"],
+			[289.0, 12.50, r"FSI$^{-}$"],
+			[289.0, 18.74, r"PF$_{6}^{-}$"],
+			[289.0, 24.98, r"BF$_{4}^{-}$"],
+			[289.0, 31.22, r"Cl$^{-}$"],
+			[289.0, 37.46, r"Br$^{-}$"],
+			[289.0, 43.70, r"I$^{-}$"]]
 
 for item in legends:
 	ax2.text(*item, horizontalalignment='left', rotation=0, size=7, color='k')
 
 # Extra space in string for padding to offset + sign
-topnames = [r" [EMIm]$^{+}$",
-			r" [BMIm]$^{+}$",
-			r" [BMPyr]$^{+}$"]
+topnames = [r" EMIm$^{+}$",
+			r" BMIm$^{+}$",
+			r" BMPyr$^{+}$"]
 
 # Hardcoded xlims, adjust if needed
 ax0.text((283.8+288.8)/2,53.75,topnames[0],
