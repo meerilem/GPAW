@@ -1,10 +1,4 @@
 BMImBF4
-C8 vacuum PBE
-289.69644
-C9 vacuum PBE
-289.702593
-C10 vacuum PBE
-289.508486
 C1 vacuum PBE
 291.435649
 C3 vacuum PBE
@@ -15,6 +9,12 @@ C6 vacuum PBE
 291.821902
 C7 vacuum PBE
 291.495172
+C8 vacuum PBE
+289.69644
+C9 vacuum PBE
+289.702593
+C10 vacuum PBE
+289.508486
 N2 vacuum PBE
 406.849182
 N4 vacuum PBE
