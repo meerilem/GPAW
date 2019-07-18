@@ -133,6 +133,11 @@ params = {'legend.fontsize': 7}
 plt.rcParams.update(params)
 print("R2 value = " + str(reg.score(X,Y)))
 
+y_est = reg.predict(X)
+
+differenceSquared = np.square(np.asarray(y_est)-np.asarray(Y))
+std_error = np.sqrt(sum(differenceSquared)/len(differenceSquared))
+print('The standard error of the estimate '+ str(std_error[0]))
 
 # from matplotlib.legend import Legend
 
