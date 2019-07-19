@@ -4,8 +4,7 @@ import pandas as pd
 
 numberlist = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0']
 atomname, m = [], []
-ncolors=['#377eb8', '#ff7f00', '#4daf4a', '#f781bf', '#a65628', '#984ea3', '#999999', '#e41a1c', '#dede00']
-ncolors=['#CC3333', '#CC3333', '#CC3333', '#CC3333', '#CC3333', '#CC3333', '#CC3333', '#CC3333']
+ncolors=['#fa5078', '#fa5078', '#fa5078', '#fa5078', '#fa5078', '#fa5078', '#fa5078', '#fa5078']
 
 def ReadTheFile1(filename):
 # notatom=True
@@ -88,7 +87,7 @@ atom='C'
 s=0.25
 count = -1
 
-ax = plt.figure(figsize=(8.3/2.54,8.3/2.54)) 
+ax = plt.figure(figsize=(8.3/2.54,8.3/2.54))
 
 X, Y = [], []
 for cat in cation:
@@ -118,9 +117,9 @@ for cat in cation:
             Y.append([m[nr_of_atom]]) #Here are deltaKS
             X.append([m1s[nr_of_atom]]) #Here are 1s
         if an == 'BF4' and cat == 'EMIm':
-            bf4 = plt.scatter(m, m1s, c='#0055ff', marker = "D", s=16, label=an,alpha=0.9,edgecolors="#333366",linewidths=0.7)
+            bf4 = plt.scatter(m, m1s, c='#7fffbb', marker = "D", s=24, label=an,alpha=1,edgecolors="#333333",linewidths=0.7)
         else:
-            plt.scatter(m, m1s, c=ncolors[count], marker = marker[count], s=16, label=an,alpha=alpha[count],edgecolors="#333366",linewidths=0.7)
+            plt.scatter(m, m1s, c=ncolors[count], marker = marker[count], s=16, label=an,alpha=alpha[count],edgecolors="#333333",linewidths=0.7)
     count += 1
 
     
@@ -145,15 +144,16 @@ print('The standard error of the estimate '+ str(std_error[0]))
 # 	frameon=False,fancybox=True, fontsize=7,handlelength=0)
 # ax.add_artist(leg)
 
-plt.xlim(left=282, right=293)
-plt.ylim(bottom=282, top=293)
+plt.xlim(left=282, right=290)
+plt.ylim(bottom=282, top=290)
 
 plt.xticks(fontsize=7)
 plt.yticks(fontsize=7)
+plt.yticks([282,284,286,288,290])
 plt.minorticks_on()
 plt.xlabel(r"$\Delta$" + "KS binding energy / eV", fontsize=8)
 plt.ylabel("1s binding energy / eV", fontsize=8)
 plt.tight_layout()
-plt.savefig('./figures_for_article/figure6_Spectra1sVSSpectradKs_%s%s.png' % (cation[0],"all"), dpi=300, bbox_inches='tight')
-plt.savefig('./figures_for_article/figure6_Spectra1sVSSpectradKs_%s%s.svg' % (cation[0],"all"), dpi=600, bbox_inches='tight')
-#plt.savefig('./figures_for_article/figure6_Spectra1sVSSpectradKs_%s%s.eps' % (cation[0],"all"), dpi=2000, bbox_inches='tight')
+plt.savefig('./figures_for_article/figure4.png', dpi=600)
+plt.savefig('./figures_for_article/figure4.svg', dpi=600)
+#plt.savefig('./figures_for_article/figure6_Spectra1sVSSpectradKs.eps'), dpi=2000, bbox_inches='tight')

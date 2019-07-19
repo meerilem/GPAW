@@ -222,7 +222,7 @@ df=pd.DataFrame(columns=['Cation', 'Anion', 'f(q, k=18.8) R2', 'f(q, V, k=18.8) 
 
 #ncolors=['#aa0a3c', '#aa0a3c', '#aa0a3c', '#aa0a3c', '#aa0a3c', '#aa0a3c', '#aa0a3c', '#aa0a3c']
 
-ncolors=["#33cc33"]*8
+ncolors=["#fa5078"]*8
 
 ########################################################
 cation = ['TEPA', 'BPy', 'Pyr14','BMIm', 'EMIm'] #Cations array
@@ -339,7 +339,7 @@ for cat in cation:
         
         ###Linear correlation
         X = np.asarray(BEs_long_array[count])[:,np.newaxis]#np.asarray(BEs_long_array[count])[:, np.newaxis]
-        x_range=np.arange(283,292.5,0.1)
+        x_range=np.arange(282,294,0.1)
 
         print(an)
         
@@ -397,17 +397,14 @@ for cat in cation:
 
         if(an==specialAnion and cat == specialCation):
 
-
-            ax.scatter(BEs_long_array[count], BEs_corr_charge,
-                       color='#aa0a3c',
-                       marker='x',alpha=0.45, s=16,
-                       edgecolors="#333366",linewidths=0.7,label="q")
-
+            #ax.scatter(BEs_long_array[count], BEs_corr_charge,
+            #           color='#7fffbb',
+            #           marker='x',alpha=0.45, s=16,
+            #           edgecolors="#333333",linewidths=0.7,label="q")
 
             ax.scatter(BEs_long_array[count], BEs_corr_charge_q,
-                       color = '#0055ff',
-                    #    color='#4daf4a',
-                       marker='D',alpha=1, s=16,edgecolors="#333366",linewidths=0.7,
+                       color='#7fffbb',
+                       marker='D',alpha=1, s=24,edgecolors="#333333",linewidths=0.7,
                        label="q+q_i+dip",
                        zorder= 99)
 #            ax.plot(x_range, y_qq, color='#000000',linestyle='--',linewidth=1.2)
@@ -415,7 +412,7 @@ for cat in cation:
 #            ax.scatter(BEs_long_array[count], BEs_corr_charge_qd,
 #                       color = '#0055ff',
 #                    #    color='#4daf4a',
-#                       marker='D',alpha=1, s=16,edgecolors="#333366",linewidths=0.7,
+#                       marker='D',alpha=1, s=16,edgecolors="#333333",linewidths=0.7,
 #                       label="q+q_i+dip",
 #                       zorder= 99)
 #            ax.plot(x_range, y_qqd, color='#000000',linestyle='--',linewidth=1.2,zorder=0)
@@ -434,27 +431,28 @@ for cat in cation:
         else:
             #Not corrected points
             ax.scatter(BEs_long_array[count],#BEs_long_array[count],
-                        BEs_corr_charge, c='#aa0a3c', marker = 'x',
-                    alpha=0.45, s=16, label='_nolegend_',
-                       edgecolors="#333366",
+                       BEs_corr_charge, c='#fa5078', marker = 'x',
+                       alpha=0.45, s=16, label='_nolegend_',
+                       edgecolors="#333333",
                        linewidths=0.7)
             
             #Corrected points
             ax.scatter(BEs_long_array[count],#BEs_long_array[count],
-                        BEs_corr_charge_q, c='#4daf4a',#"#33cc33",
+                       BEs_corr_charge_q, c='#005ac8',#"#33cc33",
                        marker = '+',
-                    alpha=0.45, s=24, label='_nolegend_',
-                       edgecolors="#333366",
+                       alpha=0.45, s=24, label='_nolegend_',
+                       edgecolors="#333333",
                        linewidths=0.7)
 
 #        print(BEs_long_array[count])
 #        print(BEs_corr_charge)
 
 # ax.tick_params(axis='x', which='both', direction='inout')
-#ax.set_xlim(left=284, right=291)
-#ax.set_ylim(bottom=283, top=296)
+ax.set_xlim(left=282, right=290)
+ax.set_ylim(bottom=282, top=290)
 plt.xticks(fontsize=7)
 plt.yticks(fontsize=7)
+plt.yticks([282,284,286,288,290])
 plt.minorticks_on()
 ax.set_xlabel(r"$\Delta$" + "KS binding energy / eV",fontsize=8)
 ax.set_ylabel(r"$V(q)$ binding energy / eV",fontsize=8)
@@ -474,7 +472,7 @@ print("f(q, k=13.45) R2=" + str(reg_q.score(np.asarray(BEs_long)[:,np.newaxis], 
 reg_qq = LinearRegression().fit(np.asarray(BEs_long)[:,np.newaxis], BEs_corr_charge_q_long)
 y_qq=reg_qq.predict(x_range[:, np.newaxis])        
 print("f(q, V, k=13.45) R2=" + str(reg_qq.score(np.asarray(BEs_long)[:,np.newaxis], BEs_corr_charge_q_long))) 
-ax.plot(x_range, y_qq, color='#000000',linestyle='--',linewidth=1.2)
+ax.plot(x_range, y_qq, color='#000000',linestyle='--',linewidth=1.0)
 
 ######Correlation of Set using the estimated points fitting for new function#######
 #Only charge
@@ -518,5 +516,6 @@ df.to_excel("./CorrelationData.xlsx")
 
 
 #Save figure
-f1.savefig('./figures_for_article/figure5_ChargeVSSpectra_%s%s_DDEC6.png' % (cation[0],"all"), format="png", dpi=300, bbox_inches='tight')
-f1.savefig('./figures_for_article/figure5_ChargeVSSpectra_%s%s_DDEC6.svg' % (cation[0],"all"), format="svg", dpi=600, bbox_inches='tight')
+f1.tight_layout()
+f1.savefig('./figures_for_article/figure5.png', format="png", dpi=600)
+f1.savefig('./figures_for_article/figure5.svg', format="svg", dpi=600)
