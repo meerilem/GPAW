@@ -5,11 +5,11 @@ numberlist = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0']
 # ncolors=['#377eb8','#ff7f00','#4daf4a','#f781bf', '#a65628', '#984ea3', '#999999', '#e41a1c', '#dede00'] #* Old colors
 
 ncolors=['k', 
-        '#0077aa',
+        '#005ac8',
         'k',
         'k', 
         'k', 
-        '#ff5c00', 
+        '#fa5078', 
         'k', 
         'k', 
         'k']
@@ -50,13 +50,13 @@ def plotAtomSpectra(m, atomname, s, y_position, dashes):
     t = []
     w = np.linspace(min(m) - 3, max(m) + 3, 201)
     atombox = dict( boxstyle='circle', 
-                    facecolor='gray', 
+                    facecolor='#cccccc', 
                     alpha=0.05)
     # plot individual signals
     for i in range(len(m)):
         # plt.plot(w, gaussian(w, m[i], s) + y_position, label=atomname[i], color=ncolors[i], dashes=dashes)
         y_pos = sum([gaussian(m[i],m[j],s) for j in range(len(m))])
-        plt.scatter(m[i],y_pos + y_position,color='crimson',s=7)
+        plt.scatter(m[i],y_pos + y_position,color='#02AD51',s=12)
         y_pos += 0.7 #* Offset
         for j in range(i):
             if abs(m[i] - m[j]) < 0.1:
@@ -163,7 +163,7 @@ plt.yticks([])
 plt.ylabel("intensity / arb. units",fontsize=8)
 plt.xlabel("binding energy / eV",fontsize=8)
 fig.tight_layout()
-fig.savefig('./figures_for_article/figure2.png', format="png", dpi=300, bbox_inches='tight')
-fig.savefig('./figures_for_article/figure2.svg', format="svg", dpi=600, bbox_inches='tight')
+fig.savefig('./figures_for_article/figure2.png', format="png", dpi=600)
+fig.savefig('./figures_for_article/figure2.svg', format="svg", dpi=600)
 # fig.savefig('./figures_for_article/figure2_EmimBf4_stacked.eps', format="eps", dpi=2000, bbox_inches='tight')
 
