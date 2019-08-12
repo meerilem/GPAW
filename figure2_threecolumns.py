@@ -95,7 +95,7 @@ grey=['#707070'] * 8
 
 s = 0.5
 atom = 'C'
-anions = ['BCN4', 'TFSI', 'FSI','PF6', 'BF4', 'Cl', 'Br', 'I']
+anions = ['BCN4', 'TFSI', 'FSI', 'PF6', 'BF4', 'I', 'Br', 'Cl']
 
 f, (ax0, ax1, ax2) = plt.subplots(1, 3, sharey=True, figsize=(17/2.54,10/2.54))
 
@@ -121,7 +121,7 @@ numbers = [0, 1, 2, 3, 4, 5, 6, 7]
 filename = ""
 plotFinalSpectra(namelist1, numbers, 2.0, [1,0], ncolors, ax2)
 
-nr = [1, 3, 7]
+nr = [1, 3, 5]
 namelist2 = []
 for x in nr:
 	namelist2.append(cation + anions[x])
