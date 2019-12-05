@@ -101,8 +101,14 @@ scale_factor = 5
 
 name = 'EMImBF4'
 atom = 'C'
+filename='_GW'
+plotFinalSpectra(linewidth, [1,3,1,1,3,1], -2*scale_factor)
+
 filename = ""
-plotFinalSpectra(linewidth, [1,0], 0)
+plotFinalSpectra(linewidth, [1,0],  -scale_factor)
+
+filename='_1s'
+plotFinalSpectra(linewidth, [1,1,1,1,3,1], 0)
 
 filename='_Villar'
 plotFinalSpectra(linewidth, [3,1,3,1], scale_factor)
@@ -113,8 +119,6 @@ plotFinalSpectra(linewidth, [3,1,1,1], 2*scale_factor)
 filename='_Kotz'
 plotFinalSpectra(linewidth, [1,1], 3*scale_factor)
 
-filename='_1s'
-plotFinalSpectra(linewidth, [1,1,1,1,3,1], -scale_factor)
 
 # from matplotlib.lines import Line2D
 # legend_elements = []
@@ -131,16 +135,17 @@ plotFinalSpectra(linewidth, [1,1,1,1,3,1], -scale_factor)
 #* Legend
 
 legends = [ [288.8, 16.25, r"Schmitz"],
-			[288.8, 11.25, r"$\mathrm{T\~{o}nisoo}$"],
-			[288.8,  6.25, r"Garcia"],
-			[288.8,  1.25, r"$\Delta$KS"],
-			[288.8, -4.25, r"1s"]]
+	  [288.8, 11.25, r"$\mathrm{T\~{o}nisoo}$"],
+	  [288.8,  6.25, r"Garcia"],
+	  [288.8,  1.25, r"1s"],
+   	  [288.8, -4.25, r"$\Delta$KS"],
+   	  [288.8, -9.25, r"GW"]]
 
 for item in legends:
 	plt.text(*item, horizontalalignment='right', rotation=0, size=7, color='k')
 
 plt.xlim(283.9,289.1)
-plt.ylim(-6,21)
+plt.ylim(-11,21)
 plt.minorticks_on()
 plt.ylabel("intensity / arb. units",fontsize=8)
 plt.xlabel("binding energy / eV",fontsize=8)
@@ -166,4 +171,3 @@ fig.tight_layout()
 fig.savefig('./figures_for_article/figure3.png', format="png", dpi=600)
 fig.savefig('./figures_for_article/figure3.svg', format="svg", dpi=600)
 # fig.savefig('./figures_for_article/figure2_EmimBf4_stacked.eps', format="eps", dpi=2000, bbox_inches='tight')
-
