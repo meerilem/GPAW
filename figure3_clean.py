@@ -101,8 +101,6 @@ scale_factor = 5
 
 name = 'EMImBF4'
 atom = 'C'
-filename='_GW'
-plotFinalSpectra(linewidth, [1,3,1,1,3,1], -2*scale_factor)
 
 filename = ""
 plotFinalSpectra(linewidth, [1,0],  -scale_factor)
@@ -138,14 +136,13 @@ legends = [ [288.8, 16.25, r"Schmitz"],
 	  [288.8, 11.25, r"$\mathrm{T\~{o}nisoo}$"],
 	  [288.8,  6.25, r"Garcia"],
 	  [288.8,  1.25, r"1s"],
-   	  [288.8, -4.25, r"$\Delta$KS"],
-   	  [288.8, -9.25, r"GW"]]
+   	  [288.8, -4.25, r"$\Delta$KS"]]
 
 for item in legends:
 	plt.text(*item, horizontalalignment='right', rotation=0, size=7, color='k')
 
 plt.xlim(283.9,289.1)
-plt.ylim(-11,21)
+plt.ylim(-9,21)
 plt.minorticks_on()
 plt.ylabel("intensity / arb. units",fontsize=8)
 plt.xlabel("binding energy / eV",fontsize=8)
